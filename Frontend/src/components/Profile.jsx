@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { LineChart, Line, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area } from 'recharts';
 import { User, Heart, MessageCircle, Share2, Bookmark, TrendingUp, Users, Eye, Calendar, Instagram, Twitter, Youtube, ChevronDown, Bell, Settings, Grid, Film, Image } from 'lucide-react';
 import InstagramProfile from './InstagramProfile';
-import Hero from './hero';
+import Hero from './Hero';
 import Posts from './Posts';
 import Analytics from './Analytics';
 const InfluencerProfile = () => {
