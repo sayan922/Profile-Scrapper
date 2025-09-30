@@ -50,16 +50,16 @@ def instagram_profile(username):
     meta = soup.find("meta", attrs={"name": "description"})
     og_image = soup.find("meta", attrs={"property": "og:image"})
 
-    if not meta:
-        return jsonify({"error": "Could not fetch profile"}), 500
+    if not meta or not og_image:
+        return jsonify({"error": "Could not fetch profile"}), 404
 
-    content = meta["content"]
+    content = meta.get("content", "")
     parts = content.split("-")[0].split(",")
 
-    followers = parts[0].strip()
-    following = parts[1].strip()
-    posts = parts[2].strip()
-    profile_pic_url = og_image["content"] if og_image else None
+    followers = parts[0].strip() if len(parts) > 0 else "0"
+    following = parts[1].strip() if len(parts) > 1 else "0"
+    posts = parts[2].strip() if len(parts) > 2 else "0"
+    profile_pic_url = og_image.get("content")
 
     # ---------- Final response ----------
     data = {
