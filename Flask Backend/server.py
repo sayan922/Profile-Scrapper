@@ -12,7 +12,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Instagram base URL from env
-INSTAGRAM_API_URL = os.getenv("INSTAGRAM_API_URL", "https://www.instagram.com")
+
 
 
 @app.route("/api/instagram/by-username/<username>")
@@ -20,7 +20,7 @@ def instagram_profile(username):
     headers = {"User-Agent": "Mozilla/5.0"}
 
     # ---------- 1. Try JSON endpoint for posts ----------
-    json_url = f"{INSTAGRAM_API_URL}/{username}/?__a=1&__d=dis"
+    json_url = f"https://www.instagram.com/{username}/?__a=1&__d=dis"
     latest_posts = []
     try:
         r_json = requests.get(json_url, headers=headers)
@@ -43,7 +43,7 @@ def instagram_profile(username):
         print("Error fetching JSON endpoint:", e)
 
     # ---------- 2. Fallback: scrape profile info ----------
-    url = f"{INSTAGRAM_API_URL}/{username}/"
+    url = f"https://www.instagram.com/{username}/"
     r = requests.get(url, headers=headers)
     soup = BeautifulSoup(r.text, "html.parser")
 
